@@ -2,9 +2,20 @@
 <html>
 <head>
     <title>My Basic Website</title>
+    <style>
+        body {
+            position: relative;
+            /* background-image: url('circus.png'); */
+            background-size: cover;
+            background-position: center;
+        }
+    </style>    
 </head>
 <body>
     <h1>Welcome to my failure of a life I mean website</h1>
+    <input type="range" id="jumpSlider" min="1" max="200" value="50">
+    <p>Move this slider to make it go faster</p>
+    <a href="https://www.youtube.com/channel/UCipSWaUO8UohWyC2G594tZg">Subscribe to my YouTube channel</a>
     <p>Maddi I hope you'll let me marry your friend now.</p>
 </body>
 <script>
@@ -37,6 +48,12 @@
     canvas.style.border = '1px solid black';
     document.body.appendChild(canvas);
     const shapes = [];
+    let speed = 50;
+
+    const jumpSlider = document.getElementById('jumpSlider');
+    jumpSlider.addEventListener('input', function() {
+        speed = parseInt(jumpSlider.value);
+    });
 
     canvas.addEventListener('click', (event) => {
         const newShape = new Shape(canvas);
@@ -46,20 +63,31 @@
 
     document.addEventListener('keydown', (event) => {
         if (event.code === 'Space') {
-            gameLoop(canvas);
+            gameLoop(canvas, speed);
         }
     });
 
-    const gameLoop = (canvas) => {
+    const gameLoop = (canvas, speed) => {
         const context = canvas.getContext('2d');
         context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
 
         shapes.forEach((shape) => {
-            shape.move((Math.random() * 2 - 1) * 50, (Math.random() * 2 - 1) * 50);
+            let randX = (Math.random() * 2 - 1) * speed;
+            let randY = (Math.random() * 2 - 1) * speed;
+            if(shape.x < 50) {
+                randX = speed;
+            } else if(shape.x > 750) {
+                randX = -speed
+            } else if(shape.y < 50) {
+                randY = speed;
+            } else if(shape.y > 450) {
+                randY = -speed;
+            } 
+            shape.move(randX, randY);
         });
     }
 
-    gameLoop(canvas); // Call the gameLoop function with the canvas</script>
+    gameLoop(canvas, speed); // Call the gameLoop function with the canvas</script>
 </html>
 
 
