@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Basic Website</title>
+</head>
+<body>
+    <h1>Welcome to my failure of a life I mean website</h1>
+    <p>Maddi I hope you'll let me marry your friend now.</p>
+</body>
+<script>
+    class Shape {
+        constructor(canvas) {
+            this.canvas = canvas;
+            this.context = canvas.getContext('2d');
+            this.x = 0;
+            this.y = 0;
+            this.width = 50;
+            this.height = 50;
+            this.color = 'gray';
+        }
+
+        draw() {
+            this.context.fillStyle = this.color;
+            this.context.fillRect(this.x, this.y, this.width, this.height);
+        }
+
+        move(moveX, moveY) {
+            this.x += moveX;
+            this.y += moveY;
+            this.draw();
+        }
+    }
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 800;
+    canvas.height = 500;
+    canvas.style.border = '1px solid black';
+    document.body.appendChild(canvas);
+    const shapes = [];
+
+    canvas.addEventListener('click', (event) => {
+        const newShape = new Shape(canvas);
+        newShape.move(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+        shapes.push(newShape);
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.code === 'Space') {
+            gameLoop(canvas);
+        }
+    });
+
+    const gameLoop = (canvas) => {
+        const context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+
+        shapes.forEach((shape) => {
+            shape.move((Math.random() * 2 - 1) * 50, (Math.random() * 2 - 1) * 50);
+        });
+    }
+
+    gameLoop(canvas); // Call the gameLoop function with the canvas</script>
+</html>
+
+
+
+
+
