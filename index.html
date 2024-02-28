@@ -20,14 +20,14 @@
 </body>
 <script>
     class Shape {
-        constructor(canvas) {
+        constructor(canvas, color) {
             this.canvas = canvas;
             this.context = canvas.getContext('2d');
             this.x = 0;
             this.y = 0;
             this.width = 50;
             this.height = 50;
-            this.color = 'gray';
+            this.color = color;
         }
 
         draw() {
@@ -56,7 +56,18 @@
     });
 
     canvas.addEventListener('click', (event) => {
-        const newShape = new Shape(canvas);
+        let color = 'gray';
+        while (true) {
+            color = prompt("what color?");
+            color = color.charAt(0).toUpperCase() + color.slice(1);
+            const validColors = ['Aqua', 'Black', 'Blue', 'Fuchsia', 'Gray', 'Green', 'Lime', 'Maroon', 'Navy', 'Olive', 'Purple', 'Red', 'Silver', 'Teal', 'White', 'Yellow'];
+            if (!validColors.includes(color)) {
+                alert('Invalid color');
+            } else {
+                break;
+            }
+        }
+        const newShape = new Shape(canvas, color);
         newShape.move(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
         shapes.push(newShape);
     });
