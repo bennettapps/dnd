@@ -1,22 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Basic Website</title>
     <style>
-        body {
-            position: relative;
-            /* background-image: url('circus.png'); */
-            background-size: cover;
-            background-position: center;
+        h1 {
+            color: white;
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
         }
-    </style>    
+        p {
+            color: white;
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+        a {
+            color: rgb(255, 0, 0);
+            text-shadow:
+                -1px -1px 0 #ffffff,
+                1px -1px 0 #ffffff,
+                -1px 1px 0 #ffffff,
+                1px 1px 0 #ffffff;
+        }
+        canvas {
+            border: 5px solid #f39c12;
+            border-radius: 50px;
+            box-shadow: 10px 10px 10px #888888;
+        }
+        body {
+            background-image: url('circus.png');
+        }
+    </style>
+    <title>My Basic Website</title>
 </head>
 <body>
     <h1>Welcome to my failure of a life I mean website</h1>
     <input type="range" id="jumpSlider" min="1" max="200" value="50">
     <p>Move this slider to make it go faster</p>
     <a href="https://www.youtube.com/channel/UCipSWaUO8UohWyC2G594tZg">Subscribe to my YouTube channel</a>
-    <p>Maddi I hope you'll let me marry your friend now.</p>
+    <p>Madi I hope you'll let me marry your friend now.</p>
 </body>
 <script>
     class Shape {
@@ -60,7 +86,7 @@
         while (true) {
             color = prompt("what color?");
             color = color.charAt(0).toUpperCase() + color.slice(1);
-            const validColors = ['Aqua', 'Black', 'Blue', 'Fuchsia', 'Gray', 'Green', 'Lime', 'Maroon', 'Navy', 'Olive', 'Purple', 'Red', 'Silver', 'Teal', 'White', 'Yellow'];
+            const validColors = ['Aqua', 'Orange', 'Black', 'Blue', 'Fuchsia', 'Gray', 'Green', 'Lime', 'Maroon', 'Navy', 'Olive', 'Purple', 'Red', 'Silver', 'Teal', 'White', 'Yellow'];
             if (!validColors.includes(color)) {
                 alert('Invalid color');
             } else {
@@ -81,7 +107,9 @@
     const gameLoop = (canvas, speed) => {
         const context = canvas.getContext('2d');
         context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-
+        context.fillStyle = 'gray';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        
         shapes.forEach((shape) => {
             let randX = (Math.random() * 2 - 1) * speed;
             let randY = (Math.random() * 2 - 1) * speed;
